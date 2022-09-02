@@ -187,10 +187,12 @@ print(p, q, r) # 1233456889.0 0 (1233456889+0j)
 #PYTHON RANDOM NUMBERS: You can import random as a built-in module in python to use and generate randome numbers
 
 from copy import copy
+from itertools import count
 from pprint import pprint
 import random
 from struct import calcsize
 import this
+from turtle import Terminator, pen
 
 print(random.randrange(1, 9))
 
@@ -898,3 +900,439 @@ for x in originalList:
 
 print(newList) #[20, 39, 450, 'Adaora', 'Chika', 'Chidinma', 'Mercy', 'Ekene']
 
+newList2 = [25, 100, 419]
+newList2.extend(newList)
+print(newList2) # [25, 100, 419, 20, 39, 450, 'Adaora', 'Chika', 'Chidinma', 'Mercy', 'Ekene']
+
+print(newList2.count('Mercy')) #1
+
+#SUBTOPIC: List Mehodes: They include:
+# count(), extend(), list(), copy(), sort(), remove(), pop(), append(), clear(), index(), insert(), reverse()
+
+#TOPIC: TUPLE
+#Tuple is another of the four collecton data types in pythoon. It is made of round brackets. It can contain a combination of data types. Tuple cannot be changed, ie no direct addition, removal or replacedment of items. Tuples are indexed from zero so they allow duplicates. Tuple is ordered.\
+#Since tuples are ordered, they can allow duplicate values
+#type() method can be used to get the data type of tuple just like others
+
+thisTuple = ('Tuple', 'Set', 'List', 'Dictionary', 'Set', 2, True)
+print(thisTuple) #('Tuple', 'Set', 'List', 'Dictionary', 'Set', 2, True)
+
+#if a tuple contains just one item, a comma has to come after it if not python will not see it as a tuple but as a string.
+singleTuple = ('Single')
+print(type(singleTuple))  #<class 'str'>
+singleTuple = ('Single',)
+print(type(singleTuple))  #<class 'tuple'>
+
+#Finmd the length of tuple:
+print(len(thisTuple)) #5
+
+#tuple() constructor can be used to create topple but recall that the items will be encircled with douple brackets
+
+tupleConstr = tuple(("Hello", 123, 'World'))
+print(tupleConstr) #('Hello', 123, 'World')
+print(type(tupleConstr)) #<class 'tuple'>
+
+#SUBTOPIC: ACCESSING TUPLE ITEMS: They can be accessed the same way we access list items by referring to their index positions or range
+
+print(tupleConstr[0]) # Hello
+print(tupleConstr[0:2]) #('Hello', 123)
+
+#negative indexing to access items: Thids is to start at the end of the list to make the access. The item at the end in this case is index -1
+print(tupleConstr[-1]) #'World'
+#-tive index range
+print(tupleConstr[-3:-1]) #('Hello', 123) #Started -3 (included) and ended at -1(excluded)
+
+#SUBTOPIC: Range of Indexes. You can filter a range of indexes
+
+fruitTuple = ("apple", "banana", "cherry", "orange", "kiwi", "melon", "mango")
+print(fruitTuple[0:4]) #('apple', 'banana', 'cherry', 'orange') - The search began at 0 9included) anad stops at 4 (excluded)
+
+print(fruitTuple[3:]) #('orange', 'kiwi', 'melon', 'mango')
+#Started at the fourth item(inclusive) an ended at the last item in the list
+print(fruitTuple[:3]) # - started at the beginning of the list and stoped at the fourth (non included)
+
+print(fruitTuple[-3:-1]) #Sarch from the end of the tuple. In this case, from the 3rd last item (included) to the first last item (excluded). Recall that  in negative indexing, the first item from the extreme of the list or tuple haas the position -1.
+
+#In the issue of ranges, just recall that the index on the left will be included bu the index in the right will not be incluluded
+
+print(fruitTuple[0:3]) #('apple', 'banana', 'cherry')
+print(fruitTuple[1:4]) #('banana', 'cherry', 'orange')
+print(fruitTuple[3:5]) #('orange', 'kiwi')
+
+#SUBTOPIC: Checking if an item exists in a tuple is done using the in keyword
+
+print('kiwi' in fruitTuple) # True
+
+if 'mango' in fruitTuple:
+    print("Hurray, you can et mango from the bassket!") #Hurray, you can et mango from the bassket!
+
+#TOPIC: Updating tuples: Tuples cannot be directly changed and items cannot be directly removed., We can however achieve this by converting the tuple to list, editing it and then converting back to tuple
+
+tupleToChange = ("apple", 1000, "cherry", 300, "kiwi", "melon", "mango")
+converterList = list(tupleToChange)
+print(converterList) # ['apple', 1000, 'cherry', 300, 'kiwi', 'melon', 'mango'] - converted
+converterList[0] = 'Orange'  #changing the list
+tupleToChange=tuple(converterList) # Converting back to tuple
+print(tupleToChange) #('Orange', 1000, 'cherry', 300, 'kiwi', 'melon', 'mango')
+
+#SUBTOPIC: Add items to tuple: Recall that we cannot directly update tuple so we have to use one of these ways to add items to tuple:
+
+#Convert then append
+convert2 = list(tupleToChange)
+convert2.append('Ben')
+tupleToChange = tuple(convert2)
+print(tupleToChange) #('Orange', 1000, 'cherry', 300, 'kiwi', 'melon', 'mango', 'Ben')
+
+#Tuples can be added using the +.
+
+tuple01 = (12, 34, 56, 78, 78)
+tuple02 = ("vegie", "Groundnut")
+addition = tuple01 + tuple02
+print(addition) #(12, 34, 56, 78, 78, 'vegie', 'Groundnut')
+
+#We can convert tuple to list to enable us to remove an item just like we did with appending
+
+convert3 = list(addition)
+convert3.pop() #Remove the last item or give this an index to pop
+print(convert3) #[12, 34, 56, 78, 78, 'vegie']
+convert3.remove(78) #Remove 78 specifically
+addition = tuple(convert3)
+print(addition) #(12, 34, 56, 78, 'vegie') - The first occurence of 78 removed
+
+'''
+#Completey delete tuple
+
+del addition
+print(addition) #NameError: name 'addition' is not defined
+'''
+#TOPIC: Unpack Tuples: This will bring out the individual items of a tuple and assign them to the specified variables. It is like destructuring in Js
+#Creating a tuple is packing a tuple
+
+pack = ('Cat', "Rat", 'Bat', 'Brat')
+one, two, three, four = pack
+# or (one, two, three, four) = pack
+print(one) #Cat
+print(four) #Brat
+
+pack2 = ('Terminator', 'Tenat', 'Metime')
+'''
+Trying to unpack with less number of variables than the hunber of items to unpack will give error unless * asterisk is used to make a list from the excess items.
+(mov1, mov2) = pack2
+print(mov1) # ValueError: too many values to unpack (expected 2)
+'''
+(mov1, *otherMovs) = pack2
+print(mov1, otherMovs) #Terminator ['Tenat', 'Metime']
+
+#If you add the * to a variable that is not the last variable on you unpacking list, then it will become the list containing the items untill the number of items left will individually match the number of variable left to the right and those will be assigned accordingly
+
+pack3 = (1,2,3,4,5,6,7,8,9,0)
+(one, two, *others, secondoTheLast, last) = pack3
+print(one, two) #1 2
+print(others) #[3, 4, 5, 6, 7, 8]
+print(secondoTheLast, last) #9,0
+
+#TOPIC: LOOPING THROPUGH TUPLES: This is done using the for and while loops
+
+pack4 = (100,200,300,400,500,600,70.0,800,)
+
+for x in pack4:
+    if x> 100:
+        print(x)
+'''
+200
+300
+400
+500
+600
+800
+'''
+#You can also use while loops
+
+l = 0
+while l<len(pack4):
+    print(pack4[l])
+    l+=1 #increment by 1 after each loop
+#the above gives us the same result as seen in the previous loop
+
+#We can decise to loop via the range of indexes
+
+print(range(len(pack4))) # range(0,8) understanding what hapens when you invoke range .
+
+for i in range(len(pack4)):
+   print(pack4[i])
+
+'''
+100
+200
+300
+400
+500
+600
+70.0
+800
+'''
+#Joining Tuples: You can join two0 or more tuples toget5her using the = operator:
+
+tuple_1 = ('Tuple',)
+tuple_2 = ('Set', False)
+tuple_3 = (True, 25)
+all_tuples = tuple_1 + tuple_2 + tuple_3
+print(all_tuples) # ('Tuple', 'Set', False, True, 25)
+
+#Multiply Tuple: Yopu can multiple the items in a tuple to get a tuple with multiple items
+
+multi_tuple = (tuple_1 *2)+(tuple_2 *3)
+print(multi_tuple) # ('Tuple', 'Tuple', 'Set', False, 'Set', False, 'Set', False)
+
+#Tuple Methods: They are two: count(), returns the number of occurences of a specified item; and index(), returned the position where an items that is searched in a tuple is located (the first occurence)
+print(multi_tuple.count('Set')) # 3
+print(multi_tuple.index(False)) # 3
+
+#NOTE: I finished the lesson on Tuples 8: 10am, 01/09/2022 and started that of sets\
+
+#TOPIC: SETS
+#Sets are the third type of collection data types that we have been learning, starting from lists. tuple, sets and dictionary.
+#Sets are unordered, no duplicates, unindexed, unchantgeable (but you can remove and add items). Sets are created with curly brackets
+#Set items can appear in different orders in different times  and they cannot be accesed by index or key
+
+set_1 ={'Hello', "Ana", 'Ana', 1, 2, True, False, 0.22, (20, 'Anime', 55)}
+print(set_1) # {False, 1, 2, 'Ana', 0.22, (20, 'Anime', 55), 'Hello'} - To show that set does not allow duplicates, only one 'Ana' was printed
+#Set can contain different data types
+#Once a set is created you cannot change the items directly from it but u can add or remove items
+#If you write duplicate values in a set, the first will be used and the rest will be discarded
+#Set could not contain a list as it returned the error: TypeError: unhashable type: 'list. But it contains a tuple
+
+print(type(set_1)) # <class 'set'> - using type() to confirm the datat type of set
+
+print(len(set_1)) #7 : using len() to confirm the length of a set
+
+set_2 = set((12, 23, 45, 56)) # can use  set({12, 23, 45, 56})
+print(set_2, type(set_2)) #  {56, 12, 45, 23} <class 'set'> - Using the set constructor to create a set and confirming the type
+
+
+#SUBTOPIC: Accessing Set Items:
+#There is no accesing via index or key since set is not indexes. But we can use for loop to loop through the set or check if an item is in it by using the in keyword.
+
+thisSet = {"Maria", "Magareth", 'Philo', 'Eucharia'}
+
+for x in thisSet:
+    print(x)
+    '''
+Magareth
+Philo
+Eucharia
+Maria
+    '''
+
+for x in thisSet:
+    if 'a' in x:
+        print('This name' + ' ' + x + ' ' + 'contains "A"')
+
+        '''
+This name Maria contains "A"
+This name Magareth contains "A"
+This name Eucharia contains "A"
+        '''
+
+#Once a set is created you can only add new items to it but cannot change the items
+
+#SUBTOPIC: Add Set Items: The add() method is used to add items to sets
+
+thisSet2 = {"Maria", "Magareth", 'Philo', 'Eucharia'}
+thisSet2.add("Mercy")
+print(thisSet2) # {'Eucharia', 'Philo', 'Magareth', 'Maria', 'Mercy'}. This takes one argument only
+
+#SUBTOPIC: Adding items from another set by using the update method
+
+thisSet2.update(thisSet)
+print(thisSet2) #{'Eucharia', 'Magareth', 'Maria', 'Mercy', 'Philo'}
+# Remember that set does not allow duplicates that is why even by adding other items from another set, those identical items were not inclded in the updated set.
+# The items to be added using update can be other iterable objects like tuple, dict or list
+
+tuple_4 = ('Tuple', 'Set', False, True, 25)
+list_1= ["Mango", "Ant"]
+
+thisSet2.update(tuple_4) #Updating set with tuple = {False, 'Set', True, 'Tuple', 'Philo', 'Magareth', 'Eucharia', 'Maria', 25, 'Mercy'}
+print(thisSet2)
+
+thisSet2.update(list_1) #Set and list
+print(thisSet2) # {False, 'Maria', True, 'Tuple', 'Set', 'Eucharia', 'Mango', 'Magareth', 'Philo', 'Ant', 'Mercy', 25}
+
+#SUBTOPIC: Removing set items: Set items can be removed using the remove() or discard(). This is not with index but by refering to the values directly. Since set allows no duplicates, this is straightforward pretty
+
+thisSet2.remove(25)
+print(thisSet2) # {False, True, 'Set', 'Philo', 'Maria', 'Mercy', 'Mango', 'Eucharia', 'Ant', 'Tuple', 'Magareth'}
+
+thisSet2.discard('Mango')
+
+print(thisSet2) # {False, True, 'Ant', 'Maria', 'Magareth', 'Mercy', 'Set', 'Philo', 'Tuple', 'Eucharia'}
+
+# The diff betwn remove and discard is that in remove, if the item specified is not a member of the set, an error will be raised but if the item is not present in discard(), no error will be raised and nothing will happen
+
+#We can also use pop() to remove the last item. The retun value is the popped item.
+
+thisPop =thisSet2.pop()
+print(thisPop) #False - because the returned value of a pop is the removed item
+
+#del is used to delete the set entirely
+del thisList2
+# print(thisList2) # NameError: name 'thisList2' is not defined. Did you mean: 'thisSet2'?
+
+#SUBTOPIC: Joining Sets: union() method can be used to join two sets and return one that contains everything. update() can be used to insert items from one set to another
+
+thisSet3 = {1, 2, 3}
+thisSet4 = {4, 6, 7, 8}
+ThisSet5 = {9,10,11}
+
+finalSet = thisSet3.union(thisSet4)
+print(finalSet) #{1, 2, 3, 4, 6, 7, 8}
+finalSet.update(ThisSet5)
+print(finalSet) # {1, 2, 3, 4, 6, 7, 8, 9, 10, 11}
+
+#SUBTOPIC: Intersection_update() method will retain only the items present in both sets
+
+List3 = ["Mary", 'Matter', 'Miliano', 'Jude']
+set4= {"Mary", 'Jude', 'Marvey', 2022, 2025}
+set4.intersection_update(List3)
+print(set4) #{'Mary', 'Jude'}
+
+#the ordinary intersection() will return a new set that can be an intersection of two sets or other object iterables. Only items present in both will be returned
+
+setInt = set4.intersection(List3)
+print(setInt) #{'Jude', 'Mary'}
+
+#symetric_difference_update() will keep only the non-duplicate items present in both
+
+
+set3 = {"Mary", 'Matter', 'Miliano', 'Jude'} #Even if this is a list or tuple it will still work
+set4= {"Mary", 'Jude', 'Marvey', 2022, 2025}
+
+set4.symmetric_difference_update(set3)
+print(set4) #{'Miliano', 'Marvey', 'Matter', 2022, 2025}
+
+#symmetric_difference() method will return a set of items that are not present in both object iterables
+#The difference between it and the former is that it will return an entirely new set while that of update will just update
+
+symSet = set4.symmetric_difference(set3)
+print(symSet) # {'Jude', 2022, 2025, 'Mary', 'Marvey'} - remember that set4 is already updated before here
+
+#SUBTOPIC: SET METHODS: They include:
+# add() - add elements to the set
+# remove() - remove specified element from the set
+# clear() - empty the set
+# copy() - Make a copy of the set
+# difference() - returns a new set that contains the elements in one set that are not preesent in another set, eg:
+
+setA = {'A', "B", 'C', 'E'}
+setB = {'A', 1, 2, 'C'}
+setC = setA.difference(setB)
+print(setC) #{'E', 'B'}
+
+# difference_update() - removes the items in this set that are present in the other set or iterable object
+setA.difference_update(setB)
+print(setA)
+# discard() -  removes a specified item
+# intersection: Returns a set with the items that are present in this set and the other
+# intersection_update() -  removes the item that is present in this set but not present in the other set
+# isdisjoint() - returns true if the two sets have an no intersection and false if they do
+setA = {'A', "B", 'C', 'E'}
+setB = {'A', 1, 2, 'C'}
+print(setA.isdisjoint(setB))
+# issubset() - returns true if all the elements in this set are present in the comparing set and false if not
+# issuperset() - returns true if all the elements in another set are present in this set
+# pop() removes a random element from the set and returns it.
+# remove() - reoves the specified element and
+#Symmetric_difference() - returns a new set that contains items from both sets that are not present in both sets
+# symmetric_difference_update() - inserts the symm diff from this set to another set
+# union() m- returns a set containing the union of two sets
+# update() - update a set with another set or other iterable
+
+
+#NEW TOPIC: PYHTON DICTIONARIES:
+# Dict is a data collection type in python. It is created with curly brackets and has key:value pairs.
+#Dict is ordered, the items are changeable and do not allow duplicates. The keys are strings while the values can be any datat types
+#Each key, value pair are divided by comma. We can also add, remove or change items in the dict
+
+dict1 = {
+'name': 'Green',
+'name': 'Anatu',
+'age': 29,
+'city': 'Ontario',
+'profession': 'dev',
+'hobbies': ['Gaming', 'Running', 'Movies'],
+}
+
+print(dict1) # {'name': 'Anatu', 'age': 29, 'city': 'Ontario', 'profession': 'dev', 'hobbies': ['Gaming', 'Running', 'Movies']}
+# In the above we see that the name whose first alphabet is A is chosen over the one that starts with G. So when there is a duplicate, the item that has the higher order will be chosen. If int, the bigger number will be chosen. Duplicates are not allowed in dict
+print(len(dict1)) # The length of a dict. 5 is the answer because the 'name' duplicate is ignored
+print(type(dict1)) # type of dictionary is 'dict'
+
+#SUBTOPIC: Accessing Dict Items: We can use square brackets to access items by referring to the key or we use the get() method
+print(dict1['city']) # Ontario
+print(dict1.get('name')) # Anatu
+
+# Get Keys: key() is used to get the list of all the  keys in a dict. It is a view of the dict. so any changes made to the dictionary will reflect on the keys
+
+print(dict1.keys())  # dict_keys(['name', 'age', 'city', 'profession', 'hobbies'])
+
+dict1['eye-color'] = 'brown'
+print(dict1.keys())  # dict_keys(['name', 'age', 'city', 'profession', 'hobbies', 'eye-color']) - updated keys
+
+# Get dict values: values() will return a list of the values in the dict
+print(dict1.values()) # dict_values(['Anatu', 29, 'Ontario', 'dev', ['Gaming', 'Running', 'Movies'], 'brown'])
+#Just like keys, the list will be updated when changes are made to the dictionary
+
+dict1['Fav-color'] = 'Green'
+
+print(dict1.values()) # dict_values(['Anatu', 29, 'Ontario', 'dev', ['Gaming', 'Running', 'Movies'], 'brown', 'Green'])
+
+#Get items: items() will return a list of the items (key,value pairs) in a dict as individual tupes in a single list. This again is a view of the dict and will change when the dict is updated
+
+print(dict1.items()) # dict_items([('name', 'Anatu'), ('age', 29), ('city', 'Ontario'), ('profession', 'dev'), ('hobbies', ['Gaming', 'Running', 'Movies']), ('eye-color', 'brown'), ('Fav-color', 'Green')])
+
+# Check for items: We use the 'in' keyword to check using the item key
+
+print('name' in dict1, 'car' in dict1) # True , False
+
+#Change item: changing is done by referring to the key of the item
+
+dict1['city'] = 'Lagos'
+print(dict1) # {'name': 'Anatu', 'age': 29, 'city': 'Lagos', 'profession': 'dev', 'hobbies': ['Gaming', 'Running', 'Movies'], 'eye-color': 'brown', 'Fav-color': 'Green'}
+
+#Update a list: update() method is used to update (add) key-value pairs into a dict. The argument must be a dict, ie, i a curly bracket
+
+dict1.update({'salary': 150000, 'status': 'single'})
+
+print(dict1) #{'name': 'Anatu', 'age': 29, 'city': 'Lagos', 'profession': 'dev', 'hobbies': ['Gaming', 'Running', 'Movies'], 'eye-color': 'brown', 'Fav-color': 'Green', 'salary': 150000, 'status': 'single'}
+
+#Adding tems to dict: you can use the update() method as dicuyssed or simply assigning an index key and value to the dictionary as seen.
+
+dict1['language'] = 'Python'
+
+#Remove items from Dict: There are different ways to get this done.
+# pop() - this will remove the specified item when fed the key name
+
+dict1.pop('salary')
+print(dict1) # salary removed
+# dict1.pop() - TypeError: pop expected at least 1 argument, got 0 - pop in dict requires a keyname
+
+# popitem() - remove the last item in the dict
+
+dict1.popitem()
+print(dict1) # removed language
+
+## del keyword removes the specified key item. It can also delete the entire dict
+
+del dict1['profession']
+print(dict1) # {'name': 'Anatu', 'age': 29, 'city': 'Lagos', 'hobbies': ['Gaming', 'Running', 'Movies'], 'eye-color': 'brown', 'Fav-color': 'Green', 'status': 'single'}
+
+dict2 = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+del dict2
+# print(dict2) - NameError: name 'dict2' is not defined. Did you mean: 'dict'?
+
+## looping through a dict: this can be done using the for loop:
