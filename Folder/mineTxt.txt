@@ -1,0 +1,4 @@
+Hello Helli!
+We are learning file handling with
+python
+This is an appending by python file handling This is an appending by python file handling

@@ -2631,10 +2631,242 @@ print(c.hump(x)) #Hello World, I Am Learning Python
 
 #Check the list of packages installed on your system by: pip list
 
+#Date: 7-sep-2022: continuation with learning
+
 #NEW TOPIC: PYTHON TRY EXCEPT
 
 # Try block lets you test a block of code for errors
 # except block lets you handle the error
 # else block lets you execute a code when THERE IS NO ERROR
 
-#Subtopic: Exception handling: When an error/exception occurs while python is running through your code, python will usually stop at the point of the error but you can set it up to
+#Subtopic: Exception handling: When an error/exception occurs while python is running through your code, python will usually stop at the point of the error but you can set it up to handle the error using the trystatement
+
+try:
+    print(notDef)
+except:
+    print("This is printed because 'notDef' is not defined")
+# instead of an error, this was printed: This is printed because 'notDef is not defined
+#Without the try block, the program would have crashed and generated an error
+
+#Subtopic: Many Exceptions: You can define as many exceptions as you want. This can be useful in dealing with different types of errors.
+# Subtopic: Else: this is use to execute a block of code if the defined exception errors do not occur
+#  eg:
+
+#NotHere = "Not here"
+try:
+    print(NotHere)
+except NameError:
+    print("Print this for name error") #This is printed
+except:
+    print("Print this for other error")
+else:
+    print("No errors here!")
+
+
+NotHere = "Not here" # if you uncomment this and add it above try, the variable NotHere becomes active and the else statement above will be printed instead
+
+# Subtopic: Finally: this will run a block of code regardless of if try block raises an error or not
+
+try:
+    print(Naah)
+except NameError:
+    print("Print this for name error") #This is printed
+except:
+    print("Print this for other error")
+finally:
+    print("The final") #this will be printed
+
+#Finally can be used to do things like clean up system resources like closing an opened document
+
+#Subtopic: Raise an exception: As a py developer, you can conditionally raise exceptions
+
+number = "Hello Green"
+
+if type(number) != 'int':
+    raise Exception("Sorry, only numbers are allowed here")
+ # Exception: Sorry, only numbers are allowed here
+
+ # You can also define what type of exception you want, it can be NameError or TypeError etc
+
+
+#NEW TOPIC: PYTHON USER INPUT.
+#Python uses the function input() to ask users for input which can then be collected and acted upon.
+
+username = input("Please enter your username:") #user name is collected
+print(username) #Print the username
+
+#Note that this will not run properly in the output panel on VSStudio code. Highlight, right-click and choose to run in terminal instead.  tHE OUTPUT panel does not accept input
+
+#08/Sep/2022
+
+#NEW TOPIC: PYTHON STRING FORMATING:
+# We can format the result of a string to make sure that it comes out as expected.
+#This can be helpful when dealing with some part of text that the developer does not control, such as may come from a database or from a user input.
+#We add curly brackets in the space or spaces that the strings would be and pass the entire text into the format() method:
+
+name = input("Type your name:") # run this first on terminal and enter the input
+message = 'Welcome to GistGate dear {}' #highlight this and the below line and run
+print(message.format(name)) # Welcome to GistGate dear Green
+
+price = 100
+food = 'Lasagna'
+alert = "You, {} , have been charged ${:.2f} for the {} dinner for two"
+print(alert.format(name, price, food)) #You, (whatever name you typed when input was run), have been charged $100.0
+# You, Mr Green , have been charged $100.0
+# So the {} act as a placeholder and the variable(s) you feed into the format() method as parameter(s) will replace the placeholders in the order that you enter the parameters in the format. That is format() takes multiple values
+#you can add parameters inside the curly brackets to indicate how to display a number for instance ':.2f' makes the price come out as 100.00
+# subtopic:tring format eferences: https://profile.w3schools.com/refresh-session?redirect_url=https%3A%2F%2Fwww.w3schools.com%2Fpython%2Fref_string_format.asp
+
+#Subtopic: Using Index Numbers: You can use Index Numbers to be sure that the variables in the format are arranged in the order you want and you do not have to bother about the order that the variables were declared
+#Repeat the same value by using index.
+
+#Format values can be of any type,
+#they can also be key-value pair, or list of key-value pairs or both or single value or variables
+
+good2 = "Fendi suit"
+good1 = 'Adidas shoes'
+totalPrice = 500
+message = 'You have successfully paid for {1},{0}, for a total of ${2:.1f}. We have charged you for {2:.2f}'
+print(message.format(good1,good2,totalPrice,)) #  You have successfully paid for Fendi suit,Adidas shoes, for a total of $500.0. We have charged you for 500.00
+
+#Subtopic: Named index: you can use names instead of index numbers in the curly braces but then when you format you have to use names when you pass the parameters. In tis case, the variables do not need prior definition:
+
+message = 'You have successfully paid for {item1} and {item2}, for a total of ${amount:.1f}. We have charged you for {amount:.2f}'
+print(message.format(item1 = "Apple Laptop",item2 = "Ipod", amount = 1000,)) # You have successfully paid for Apple Laptop and Ipod, for a total of $1000.0. We have charged you for 1000.00
+
+# The placeholders in format can be named-indexes, empty or numbered as we have seen
+# It is good to make reference to the string format reference as there are useful formats there like the thousand separator:
+
+amount = 1000000
+text = 'The amount he paid us was ${:,}'
+print(text.format(amount))
+
+
+#NEW TOPIC: NEW SECTION: FILE HANDLING
+# Python file handling is important for web applications. Python has several functions for creating, reading, updating and deleting files.
+
+#Subtopic: File Opening: File Handling:
+# The major function in file handling is open() function. This is where most operations begin with. The open() function takes two parameters - the filename and mode.
+#There are four different modes(methods) for opening a file:
+# "r" - read -  Default opening of a file to read its contents. Error is returned if file does not exisit
+# "a" - append - open a file for apppending. This will create a file if it doesn't already exist
+# "w" - write - this opens a file to write into it. It creates a new file if it does not already exist
+# "x" -  create -  crates the specified file. Returns error if it already exist
+open("myFile", "x")
+open("myFile", "w")
+open('myFile', 'r') # FileNotFoundError: [Errno 2] No such file or directory: 'myFile'
+
+#You can also specify how python handles the file, whether as a binary or text mode
+
+# "t" - text = default mode
+# "b" - binary mode (for images, sounds etc)
+
+#Open syntax:
+
+# You can simply open a file by using the filename without the mode
+open("myFile")
+
+open("thisJSFile.js", "rt") #r is read and t is text, these are defaults and no need to add them if you just want to open a text file
+
+#Open a file on a server: To open a file that is  in the same location/folder as our python code
+#We use the built-in read function to read the content of a file
+file = open("thisFile.txt", "r")
+print(file.read())
+
+#To read a file that is in a different folder you have to refer to the location
+
+file = open("Folder\mineTxt.txt", 'r')
+print(file.read()) #Hello Helli!
+
+'''
+pix = open("anatu cropped.JPG", "rb")
+print(pix.read())
+'''
+#Subtopic: Read only parts of file: You can specify how many characters gets read
+
+file = open("Folder\mineTxt.txt", 'r')
+print(file.read(6)) # Hello
+
+#We can read one or more lines using the readline() function
+
+file = open("Folder\mineTxt.txt", 'r')
+print(file.readline()) # Hello Helli! - first line
+print(file.readline()) # We are learning file handling with - second line
+
+#We can loop through the lines one by one to read the whole file
+
+file = open("Folder\mineTxt.txt", 'r')
+for x in file:
+    print(x)
+'''
+Hello Helli!
+
+We are learning file handling with
+
+python
+
+'''
+
+#Subtopic: It is good to always close a file after you are done with it. Always do it to avoid unexpected behaviours like changes made to file not showing due to bufferring
+
+file = open("Folder\mineTxt.txt", 'r')
+print(file.read())
+file.close()
+print(file.read()) # ValueError: I/O operation on closed file. - when tried reading file after closure
+
+#Subtopic: Python File Writing:
+# We must add a parameter to the open function to be able to edit or write to it.
+# "a" - append - that is to add to the end of the file
+# "w" - write -  this is to overwrite any existing content
+
+appd = open("Folder\mineTxt.txt", 'a')
+appd.write(" This is an appending by python file handling")
+appd.close()
+
+appd = open("Folder\mineTxt.txt", 'r')
+print(appd.read())
+appd.close()
+
+demotxt = open("Demotext1.txt", "a") # This created the file since it was not existing before now. File in appending mode also
+demotxt.write("This is text to be overwritten soon") # Append to the file's text end
+demotxt.close() # Close to smoothly do other operations
+
+demotxt=open("Demotext1.txt", "w") #open the file again with the overwriting mode activated
+demotxt.write("Told you I will overwrite you!") # Writing now overwrites what is inside
+demotxt.close() #Close
+
+
+demotxt =open("Demotext1.txt", "r") #Open same file with reading mode
+print(demotxt.read()) #See that the overwriting worked
+
+# Subtopic: Create a new file: We create a new file by using open() with the file name (that does not exist) and "x", "a" or "w" as second parameter.
+# "x" - create -  will create a new file and returns an error if the file already exists.
+# "a" - Append -  will create a file if the specified file does not exist. The created fill will also be in appending mode
+# "w" - write - will create a file if the specified does not exist and put it in writing mode
+
+# Note that the created file will be empty until you add sopmething to it.
+
+#Subtopic: Deleting files: In order to delete files or folders, you have import OS module to your program and run its os.remove() function
+
+import os
+
+os.remove("Demotext1.txt")
+
+#You should try to check if the file exists before trying to delete. This is to avoid errors
+import os
+if os.path.exists("Demotext1.txt"):
+    os.remove("Demotext1.txt")
+else:
+    print("The specified file does not exist or has been removed already") #The specified file does not exist or has been removed already
+
+
+# Subtopic: Delete a folder: You can also delete a folder using the os.rmdir() function
+
+#Create a folder and then delete it:
+import os
+#os.mkdir("testFolder") # Created a directory with the name
+os.rmdir("testFolder") # Deleted it.
+
+# The above can also be conditional and you can hold exceptions or print messages on success or failure of operations
+
+

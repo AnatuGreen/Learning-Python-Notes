@@ -1,0 +1,4 @@
+Hello! Welcome to thisFile.txt
+This file is for testing purposes.
+Good Luck!
+My Name is Anatu
